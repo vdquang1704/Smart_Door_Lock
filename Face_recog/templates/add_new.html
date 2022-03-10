@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="utf-8">
+    <title>Sidebar Dashboard Template With Sub Menu</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0-2/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" charset="utf-8"></script>
+</head>
+
+<style>
+    ol li {
+        text-align: center;
+        width: 100%;
+    }
+
+    ol li:nth-child(even) {
+        color: black;
+        background: PaleGoldenRod;
+    }
+
+    ol li:nth-child(odd) {
+        color: white;
+        background: rgb(187, 177, 65);
+    }
+
+    ol li div {
+        display: inline-flex;
+        width: 100%;
+    }
+
+    span {
+        margin: auto;
+        font-size: 20px;
+        width: 20%;
+    }
+
+    .arrow-icon {
+        background: none;
+        height: 1.4em;
+        width: 10%;
+        display: block;
+        padding: 0.5em;
+        margin: 1em auto;
+        position: relative;
+        cursor: pointer;
+        border-radius: 4px;
+    }
+
+    .left-bar {
+        position: absolute;
+        background-color: transparent;
+        top: 10px;
+        left: 137px;
+        width: 20px;
+        height: 5px;
+        display: block;
+        transform: rotate(35deg);
+        float: right;
+        border-radius: 2px;
+    }
+
+    .left-bar:after {
+        content: "";
+        background-color: white;
+        width: 20px;
+        height: 5px;
+        display: block;
+        float: right;
+        border-radius: 6px 10px 10px 6px;
+        transition: all 0.5s cubic-bezier(0.25, 1.7, 0.35, 0.8);
+        z-index: -1;
+    }
+
+    .right-bar {
+        position: absolute;
+        background-color: transparent;
+        top: 10px;
+        left: 150px;
+        width: 20px;
+        height: 5px;
+        display: block;
+        transform: rotate(-35deg);
+        float: right;
+        border-radius: 2px;
+    }
+
+    .right-bar:after {
+        content: "";
+        background-color: white;
+        width: 20px;
+        height: 5px;
+        display: block;
+        float: right;
+        border-radius: 10px 6px 6px 10px;
+        transition: all 0.5s cubic-bezier(0.25, 1.7, 0.35, 0.8);
+        z-index: -1;
+    }
+
+    .open li .left-bar:after {
+        transform-origin: center center;
+        transform: rotate(-70deg);
+    }
+
+    .open li .right-bar:after {
+        transform-origin: center center;
+        transform: rotate(70deg);
+    }
+
+    li .temp {
+        width: 60%;
+        content-visibility: hidden;
+    }
+
+    li .temp.visible {
+        content-visibility: visible;
+    }
+</style>
+
+<body>
+
+    <!--wrapper start-->
+    <div class="wrapper">
+        <!--header menu start-->
+        <div class="header">
+            <div class="header-menu">
+                <div class="title" style="font-size: 20px;">Smart <span>Door Lock</span></div>
+                <div class="sidebar-btn">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </div>
+        </div>
+        <!--header menu end-->
+        <!--sidebar start-->
+        <div class="sidebar">
+            <div class="sidebar-menu">
+                <center class="profile">
+                    <img src="{{ url_for('static', filename='image/home.png') }}" alt="">
+                </center>
+                <li class="item">
+                    <a href="index.html" class="menu-btn">
+                        <i class="fas fa-desktop"></i><span>Dashboard</span>
+                    </a>
+                </li>
+                <li class="item" id="profile">
+                    <a href="storage.html" class="menu-btn">
+                        <i class="fas fa-user-circle"></i><span>Profile</span>
+                    </a>
+                </li>
+                <li class="item">
+                    <a href="add_new.html" class="menu-btn">
+                        <i class="fas fa-info-circle"></i><span>About</span>
+                    </a>
+                </li>
+            </div>
+        </div>
+        <div class="main-container" style="background-image: url('/static/image/BG1.jpg'); overflow: scroll;">
+            <ol class="gradient-list">
+                <li>
+                    <div>
+                        <span class="date">Date</span> <span class="name">Name</span> <span class="rules">Rule</span>
+                        <a class="arrow-icon">
+
+                        </a>
+                    </div>
+                </li>
+                {% for item in data %}
+                <li>
+                    <div>
+                        <span class="date">{{item[0]}} </span> <span class="name">{{item[1]}}</span> <span
+                            class="rules">{{item[2]}}</span>
+                        <a class="arrow-icon">
+                            <span class="left-bar"></span>
+                            <span class="right-bar"></span>
+                        </a>
+                    </div>
+                    <img class="temp" src="{{item[3]}}" alt="">
+                </li>
+                {% endfor %}
+            </ol>
+        </div>
+    </div>
+    <!--wrapper end-->
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(".sidebar-btn").click(function () {
+                $(".wrapper").toggleClass("collapse");
+            });
+
+            $("li").click(function () {
+                // $(".wrapper").toggleClass("collapse");
+                $(this).toggleClass("open");
+                $(this).children(".temp").toggleClass("visible");
+            });
+        });
+    </script>
+
+</body>
+
+</html>

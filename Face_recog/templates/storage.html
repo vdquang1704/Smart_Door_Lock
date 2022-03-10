@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="utf-8">
+    <title>Sidebar Dashboard Template With Sub Menu</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0-2/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" charset="utf-8"></script>
+</head>
+
+<style>
+    .main-container {
+        display: grid;
+        grid-gap: 20px;
+        grid-template-columns: auto auto auto;
+        background-color: #2196F3;
+        padding: 10px;
+    }
+
+    .grid-item {
+        /* background-color: rgba(255, 255, 255, 0.8); */
+        border: 1px solid rgba(0, 0, 0, 0.8);
+        margin-left: auto;
+        margin-right: auto;
+        height: 500px;
+        width: 400px;
+        font-size: 30px;
+        text-align: center;
+        border-radius: 10px;
+    }
+    .admin{
+        background-color: #2196F3;
+    }
+    .guess{
+        background-color: wheat;
+    }
+</style>
+
+<body>
+
+    <!--wrapper start-->
+    <div class="wrapper">
+        <!--header menu start-->
+        <div class="header">
+            <div class="header-menu">
+                <div class="title" style="font-size: 20px;">Smart <span>Door Lock</span></div>
+                <div class="sidebar-btn">
+                    <i class="fas fa-bars"></i>
+                </div>
+                <ul>
+                    <!-- <li><a href="#"><i class="fas fa-search"></i></a></li>
+                        <li><a href="#"><i class="fas fa-bell"></i></a></li> -->
+                    <li><a href="capture.html"><i class="fa fa-plus"></i></a></li>
+                </ul>
+            </div>
+        </div>
+        <!--header menu end-->
+        <!--sidebar start-->
+        <div class="sidebar">
+            <div class="sidebar-menu">
+                <center class="profile">
+                    <img src="{{ url_for('static', filename='image/home.png') }}" alt="">
+                </center>
+                <li class="item">
+                    <a href="index.html" class="menu-btn">
+                        <i class="fas fa-desktop"></i><span>Dashboard</span>
+                    </a>
+                </li>
+                <li class="item" id="profile">
+                    <a href="storage.html" class="menu-btn">
+                        <i class="fas fa-user-circle"></i><span>Profile</span>
+                    </a>
+                </li>
+                <li class="item">
+                    <a href="add_new.html" class="menu-btn">
+                        <i class="fas fa-info-circle"></i><span>About</span>
+                    </a>
+                </li>
+            </div>
+        </div>
+        <div class="main-container" style="background-image: url('/static/image/BG1.jpg'); overflow: scroll; background-size: cover;">
+            {% for item in data %}
+            <div class="grid-item {{item[2]}}">
+                <div style="max-width: 350px; height: 300px; margin-top: 10px; margin-left: auto; margin-right: auto;">
+                    <img src="{{item[1]}}" alt="" style="margin-left: auto; margin-right: auto; border-radius: 20px; height: 300px; max-width: 350px;">
+                </div>
+                <span style="margin-left: auto; margin-right: auto; top: -10px;">{{item[0]}}</span>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    <!--wrapper end-->
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(".sidebar-btn").click(function () {
+                $(".wrapper").toggleClass("collapse");
+            });
+        });
+    </script>
+
+</body>
+
+</html>

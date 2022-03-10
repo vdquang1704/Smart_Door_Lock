@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="utf-8">
+    <title>Sidebar Dashboard Template With Sub Menu</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" type="text/css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0-2/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" charset="utf-8"></script>
+</head>
+<style>
+    p {
+        text-align: center;
+        margin-top: 10px;
+    }
+
+    input[type=text],
+    select {
+        width: 30%;
+        padding: 12px 20px;
+        margin: 8px 0;
+        display: inline-block;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+        text-align: center;
+        font-size: large;
+    }
+
+    input[type=submit] {
+        width: 15%;
+        background-color: #4CAF50;
+        color: white;
+        padding: 14px 20px;
+        margin: 8px 0;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: large;
+    }
+
+    input[type=submit]:hover {
+        background-color: #45a049;
+    }
+
+    label{
+        font-size: larger;
+        color: white;
+        font: bold;
+        margin-right: 10px;
+    }
+</style>
+
+<body>
+
+    <!--wrapper start-->
+    <div class="wrapper">
+        <!--header menu start-->
+        <div class="header">
+            <div class="header-menu">
+                <div class="title" style="font-size: 20px;">Smart <span>Door Lock</span></div>
+                <div class="sidebar-btn">
+                    <i class="fas fa-bars"></i>
+                </div>
+                <ul>
+                    <!-- <li><a href="#"><i class="fas fa-search"></i></a></li>
+                        <li><a href="#"><i class="fas fa-bell"></i></a></li> -->
+                    <li><a id="mybutton"><i class="fas fa-sync"></i></a></li>
+                </ul>
+            </div>
+        </div>
+        <!--header menu end-->
+        <!--sidebar start-->
+        <div class="sidebar" style="height: 100%;">
+            <div class="sidebar-menu">
+                <center class="profile">
+                    <img src="{{ url_for('static', filename='image/home.png') }}" alt="">
+                </center>
+                <li class="item">
+                    <a href="index.html" class="menu-btn">
+                        <i class="fas fa-desktop"></i><span>Dashboard</span>
+                    </a>
+                </li>
+                <li class="item" id="profile">
+                    <a href="storage.html" class="menu-btn">
+                        <i class="fas fa-user-circle"></i><span>Profile </span>
+                    </a>
+                </li>
+                <li class="item">
+                    <a href="add_new.html" class="menu-btn">
+                        <i class="fas fa-info-circle"></i><span>About</span>
+                    </a>
+                </li>
+            </div>
+        </div>
+        <!--sidebar end-->
+        <!--main container start-->
+        <div class="main-container" style="background-image: url('/static/image/BG1.jpg');">
+            <img src="{{ url_for('video_feed') }}" style="border-radius: 50px; margin-left: auto; margin-right: auto;"
+                height="65%">
+            <form action="#" method="post" style="margin-left: auto; margin-right: auto;">
+                <p style="font-size: large; color: antiquewhite; text-align: center; font: bold;">INPUT NAME </p>
+                <p>
+                    <input type="text" name="nm" />
+                </p>
+                <p>
+                    <input type="radio" id="contactChoice1" name="rules" value="admin">
+                    <label for="contactChoice1">Admin</label>
+
+                    <input type="radio" id="contactChoice2" name="rules" value="guess" checked ="true">
+                    <label for="contactChoice2">Guess</label>
+                </p>
+
+                <p><input type="submit" value="Submit" /></p>
+            </form>
+
+        </div>
+        <!--main container end-->
+    </div>
+    <!--wrapper end-->
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(".sidebar-btn").click(function () {
+                $(".wrapper").toggleClass("collapse");
+            });
+        });
+    </script>
+
+    <script type=text/javascript> $(function() { $("#mybutton").click(function (event) { $.getJSON('/reload', { },
+    function(data) { }); return false; }); }); </script>
+
+</body>
+
+</html>
